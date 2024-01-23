@@ -33,4 +33,5 @@ public class StudentRepositoryJpaTest {
         assertTrue(indexOptional.isPresent());
         assertEquals(indexOptional.get(), 50L);
     }
+
 }

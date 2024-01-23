@@ -1,6 +1,7 @@
 package com.example.students.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,21 @@ public class ExceptionResponseControllerAdvice {
     public ErrorResponse handeNotFound(RuntimeException exception) {
         return new ErrorResponse(Instant.now(), exception.getMessage());
     }
+
+    @ExceptionHandler(FriendNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleGlobalCustomException(FriendNotFoundException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(Instant.now(), ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.GONE);
+    }
+
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(value = {InternalServerErrorException.class, InternalServerErrorException.class})
+    @ResponseBody
+    public ErrorResponse internalServerError(RuntimeException exception) {
+        return new ErrorResponse(Instant.now(), exception.getMessage());
+    }
+
 
 //    Zakomentowana alternatywna wersja tego zapisu - dla jednego Exceptiona powinniśmy mieć
 //    jeden exception handler a więc jeśli chcecie korzystać z metody poniżej musicie zakomentować metodę powyżej

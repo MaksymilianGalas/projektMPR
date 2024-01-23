@@ -3,8 +3,10 @@ package com.example.students.service;
 import com.example.students.data.Student;
 import com.example.students.data.StudentRepository;
 import com.example.students.data.StudentUnit;
+import com.example.students.mappery.FriendMapper;
 import com.example.students.mappery.StudentMapper;
 import com.example.students.resource.CreateStudent;
+import com.example.students.resource.StudentDto;
 import lombok.extern.java.Log;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -28,13 +31,14 @@ class StudentServiceTest {
     private StudentRepository studentRepository;
     private StudentMapper studentMapper;
     private StudentService studentService;
+    private FriendMapper friendMapper;
 
     @BeforeEach
     void setUp() {
         studentRepository = mock(StudentRepository.class);
         studentMapper = spy(StudentMapper.class);
-        studentService = new StudentService(studentRepository, studentMapper);
-        when(studentRepository.findMaxIndex()).thenReturn(Optional.of(5L));
+        studentService = new StudentService(studentRepository, studentMapper, friendMapper);
+        lenient().when(studentRepository.findMaxIndex()).thenReturn(Optional.of(5L));
     }
 
     @Test
@@ -65,6 +69,24 @@ class StudentServiceTest {
         assertEquals(student.getName(), studentArg.getName());
         assertEquals(student.getUnit(), studentArg.getUnit());
         assertEquals(50L, studentArg.getIndex());
+    }
+    @Test
+    void givenStudentId_whenGetStudentById_ThenReturnStudentDto() {
+        UUID studentId = UUID.randomUUID();
+        StudentUnit unit = StudentUnit.GDANSK;
+        long testValue = 123L;
+        Student student = new Student("John Doe", unit, testValue);
+        student.setId(studentId);
+        student.setName("John Doe");
+        student.setIndex(100L);
+
+        when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
+
+        Student students = studentService.getStudentByIdNoDto(studentId);
+
+        assertEquals(studentId, students.getId());
+        assertEquals("John Doe", students.getName());
+        assertEquals(100L, students.getIndex());
     }
 
 }

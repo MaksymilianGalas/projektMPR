@@ -1,7 +1,9 @@
 package com.example.students.frontend;
 
+import com.example.students.data.FriendsRepository;
 import com.example.students.data.StudentRepository;
 import com.example.students.resource.CreateStudent;
+import com.example.students.service.FriendsService;
 import com.example.students.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,12 @@ public class StudentsPageController {
 
     private final StudentRepository studentRepository;
     private final StudentService studentService;
+    private final FriendsService friendsService;
 
-    public StudentsPageController(StudentRepository studentRepository, StudentService studentService) {
+    public StudentsPageController(StudentRepository studentRepository, StudentService studentService, FriendsService friendsService) {
         this.studentRepository = studentRepository;
         this.studentService = studentService;
+        this.friendsService = friendsService;
     }
 
     @GetMapping
@@ -39,6 +43,12 @@ public class StudentsPageController {
     @PostMapping("/add")
     public String addStudentAndRedirectToMainPage(@ModelAttribute CreateStudent createStudent){
         studentService.createStudent(createStudent);
+        return "redirect:/students-page";
+    }
+
+    @PostMapping("/addTransactional")
+    public String addStudentTransactionalAndRedirectToMainPage(@ModelAttribute CreateStudent createStudent){
+        studentService.createStudentTransactional(createStudent);
         return "redirect:/students-page";
     }
 }

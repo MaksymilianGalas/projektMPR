@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.List;
 import java.util.UUID;
 
+@Setter
 @Getter
 @Entity // ta adnotacja informuje nas oraz spring boota o tym, że jest to Javovy model tabeli w bazie ( w tym wypadku tabeli student) i na ten obiekt powinno zostać wykonane mapowanie
 @AllArgsConstructor
@@ -27,6 +28,16 @@ public class Student {
     )
     private List<Lecture> lecture;
 
+    @OneToMany
+    @Getter
+    @Setter
+    @JoinColumn(name = "friends")
+    private List<Friends> friends;
+
+    @Setter
+    @Getter
+    @OneToMany(mappedBy = "student")
+    private List<Assignment> assignments;
     public Student(String name, StudentUnit unit) {
         this.name = name;
         this.unit = unit;
@@ -37,4 +48,5 @@ public class Student {
         this.unit = unit;
         this.index = index;
     }
+
 }

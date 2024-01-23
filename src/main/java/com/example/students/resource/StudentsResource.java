@@ -1,5 +1,8 @@
 package com.example.students.resource;
 
+import com.example.students.data.Assignment;
+import com.example.students.data.Friends;
+import com.example.students.data.FriendsRepository;
 import com.example.students.exception.NotAllowedOperationException;
 import com.example.students.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,8 @@ import java.util.UUID;
 public class StudentsResource {
 
     private final StudentService studentService;
+    private final FriendsRepository friendsRepository;
+
 
     //Przyjmujemy Data transfer object, który służy nam do tworzenia studenta
     //zapewnia to ograniczenie udostępniania struktury i przyjmowanie tylko niezbędnych danych
@@ -49,4 +54,5 @@ public class StudentsResource {
     public List<StudentDto> getByName(@RequestParam String name) {
         return studentService.getNameBy(name);
     }
+
 }

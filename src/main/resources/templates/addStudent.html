@@ -12,14 +12,23 @@
     </label>
     <label>
         Unit
-    <select th:field="*{unit}">
-        <option th:each="studentUnit: ${T(com.example.students.data.StudentUnit).values()}"
-                th:value="${studentUnit}" th:text="${studentUnit}">
-        </option>
-    </select>
+        <select th:field="*{unit}">
+            <option th:each="studentUnit: ${T(com.example.students.data.StudentUnit).values()}"
+                    th:value="${studentUnit}" th:text="${studentUnit}">
+            </option>
+        </select>
+    </label>
+    <label>
+        Friend
+        <select th:field="*{friend}">
+            <option th:each="friend : ${friends}"
+                    th:value="${friend.id}" th:text="${friend.name}">
+            </option>
+        </select>
     </label>
     <button type="submit">Dodaj</button>
 </form>
+<a th:href="@{/students-page}">Back to Students</a>
 </body>
 <footer th:insert="footer"></footer>
 </html>

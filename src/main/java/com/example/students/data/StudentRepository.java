@@ -16,12 +16,15 @@ import java.util.UUID;
 //możemy dodatkowo skorzystać z interface'ów PagingAndSortingRepository lub JpaRepository, jesli potrzebujemy dodatkowych funkcji udostępnianych przez te interface'y
 public interface StudentRepository extends JpaRepository<Student, UUID> {
 
-    @Modifying // dodajemy zawsze gdy zapytanie modyfikuje w jakiś sposób dane - w przypadku springa będą to query z delete lub update, choć sam update częściej realizowany jest przez obiekty z gotową metodą save (z interface CrudRepository), tak jak insert
-    @Transactional // tą adnotacją otwieramy transakcje na bazie danych - mała uwaga nie musi ona znajdować się w repozytorium, może znajdować się w dowolnym miejscu w kodzie
-    //znacznie częściej stosuje się ją w serwisach aby uniknąć otwierania wielu małych transakcji
+    @Modifying
+    // dodajemy zawsze gdy zapytanie modyfikuje w jakiś sposób dane - w przypadku springa będą to query z delete lub update, choć sam update częściej realizowany jest przez obiekty z gotową metodą save (z interface CrudRepository), tak jak insert
+    @Transactional
+        // tą adnotacją otwieramy transakcje na bazie danych - mała uwaga nie musi ona znajdować się w repozytorium, może znajdować się w dowolnym miejscu w kodzie
+        //znacznie częściej stosuje się ją w serwisach aby uniknąć otwierania wielu małych transakcji
     void deleteByName(String name);
 
-    @Query("select max(s.index) from Student s") //query pozwala napisać nam bardziej skomplikowane zapytania, których spring nie jest w stanie wygenerować z metod
+    @Query("select max(s.index) from Student s")
+        //query pozwala napisać nam bardziej skomplikowane zapytania, których spring nie jest w stanie wygenerować z metod
     Optional<Long> findMaxIndex();
 
     List<Student> findByName(String name);
@@ -31,4 +34,5 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
     default List<Student> findFromGdanskByName(String name) {
         return findByUnitAndName(StudentUnit.GDANSK, name);
     }
+
 }
