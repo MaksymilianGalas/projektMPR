@@ -84,4 +84,17 @@ public class StudentService {
         studentRepository.save(studentToSave);
         return studentToSave;
     }
+
+    public List<StudentDto> getAll() {
+        return studentRepository.findAll()
+                .stream()
+                .map(studentMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public void updateStudent(UUID id, CreateStudent student) {
+        var studentToSave = studentMapper.toEntity(student);
+        studentToSave.setId(id);
+        studentRepository.save(studentToSave);
+    }
 }

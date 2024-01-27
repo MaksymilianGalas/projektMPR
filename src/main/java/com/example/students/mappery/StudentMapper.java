@@ -14,7 +14,9 @@ public class StudentMapper {
                 student.getId(),
                 student.getName(),
                 student.getUnit(),
-                student.getIndex()
+                student.getIndex(),
+                student.getEmail(),
+                student.getPhoneNumber()
         );
     }
 

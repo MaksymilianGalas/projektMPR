@@ -22,6 +22,6 @@ public class FriendMapper {
     }
 
     public Friends toEntity(CreateFriend createFriend) {
-        return new Friends(createFriend.getName(), createFriend.getEmail());
+        return new Friends(createFriend.getId() ,createFriend.getName(), createFriend.getEmail());
     }
 }

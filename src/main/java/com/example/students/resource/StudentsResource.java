@@ -49,10 +49,18 @@ public class StudentsResource {
         }
         studentService.deleteByName(name);
     }
+    @PutMapping("/{id}")
+    public void updateStudent(@PathVariable UUID id, @RequestBody @Validated CreateStudent student) {
+        studentService.updateStudent(id, student);
+    }
 
-    @GetMapping
+    @PostMapping("/{name}")
     public List<StudentDto> getByName(@RequestParam String name) {
         return studentService.getNameBy(name);
+    }
+    @GetMapping
+    public List<StudentDto> getAll() {
+        return studentService.getAll();
     }
 
 }

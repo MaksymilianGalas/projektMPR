@@ -14,14 +14,14 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "/students")
+@RequestMapping(path = "/fri")
 @RequiredArgsConstructor
 public class FriendsResource {
 
     private final StudentService studentService;
     private final FriendsService friendsService;
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/friends/{id}")
     public List<FriendDto> findFriendsByStudentId(@RequestParam UUID id) {
         return friendsService.findFriendsDtoById(id);
     }

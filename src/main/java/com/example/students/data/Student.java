@@ -16,6 +16,7 @@ public class Student {
     @Id //jak tabela w bazie tak samo każda encja musi mieć id
     @GeneratedValue //ta adnotacja informuje nas o tym, że wartość pola id będzie generowana automatycznie i pole to nie powinno być uzupełniane przez apliakcje przy tworzeniu obiektu
     private UUID id;
+    @Getter
     private String name;
     @Enumerated(EnumType.STRING)
     private StudentUnit unit;
@@ -33,7 +34,12 @@ public class Student {
     @Setter
     @JoinColumn(name = "friends")
     private List<Friends> friends;
-
+    @Getter
+    @Setter
+    private String email;
+    @Getter
+    @Setter
+    private String phoneNumber;
     @Setter
     @Getter
     @OneToMany(mappedBy = "student")
@@ -48,5 +54,6 @@ public class Student {
         this.unit = unit;
         this.index = index;
     }
+
 
 }

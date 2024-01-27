@@ -15,4 +15,6 @@ public class StudentDto {
     private String name;
     private StudentUnit unit;
     private Long index;
+    private String email;
+    private String phoneNumber;
 }

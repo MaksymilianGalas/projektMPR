@@ -1,5 +1,6 @@
 package com.example.students.data;
 
+import com.example.students.resource.StudentDto;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -28,6 +29,7 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
     Optional<Long> findMaxIndex();
 
     List<Student> findByName(String name);
+
 
     List<Student> findByUnitAndName(StudentUnit unit, String name);
 

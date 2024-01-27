@@ -28,7 +28,8 @@ public class Friends {
 
     @ManyToOne
     private Assignment assignment;
-    public Friends(String name, String email) {
+    public Friends(UUID id,String name, String email) {
+        this.id = id;
         this.name = name;
         this.email = email;
     }
