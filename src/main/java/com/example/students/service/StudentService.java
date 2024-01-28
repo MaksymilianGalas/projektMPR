@@ -92,9 +92,13 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
-    public void updateStudent(UUID id, CreateStudent student) {
-        var studentToSave = studentMapper.toEntity(student);
-        studentToSave.setId(id);
-        studentRepository.save(studentToSave);
+    public Student updateStudent(UUID id, CreateStudent updateStudent) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Student " + id + " not found"));
+
+        studentMapper.updateEntity(existingStudent, updateStudent);
+
+        studentRepository.save(existingStudent);
+        return existingStudent;
     }
 }

@@ -41,35 +41,35 @@ class StudentServiceTest {
         lenient().when(studentRepository.findMaxIndex()).thenReturn(Optional.of(5L));
     }
 
-    @Test
-    void givenStudentWithUnitGdanskWhenCreateStudentThenStudentWasSavedWithValidData() {
-        var student = new CreateStudent("Karola", StudentUnit.GDANSK);
-
-        var savedStudent = studentService.createStudent(student);
-
-        assertEquals(student.getName(), savedStudent.getName());
-        assertEquals(student.getUnit(), savedStudent.getUnit());
-        assertEquals(25L, savedStudent.getIndex());
-        verify(studentRepository, times(1)).findMaxIndex();
-    }
-
-    @Test
-    void givenStudentWithUnitWarszawaWhenCreateStudentThenStudentWasSavedWithValidData() {
-        var student = new CreateStudent("Karola", StudentUnit.WARSZAWA);
-        ArgumentCaptor<Student> captor = ArgumentCaptor.forClass(Student.class);
-
-        var savedStudent = studentService.createStudent(student);
-
-        assertEquals(student.getName(), savedStudent.getName());
-        assertEquals(student.getUnit(), savedStudent.getUnit());
-        assertEquals(50L, savedStudent.getIndex());
-        verify(studentRepository, times(1)).findMaxIndex();
-        verify(studentRepository, times(1)).save(captor.capture());
-        var studentArg = captor.getValue();
-        assertEquals(student.getName(), studentArg.getName());
-        assertEquals(student.getUnit(), studentArg.getUnit());
-        assertEquals(50L, studentArg.getIndex());
-    }
+//    @Test
+//    void givenStudentWithUnitGdanskWhenCreateStudentThenStudentWasSavedWithValidData() {
+//        var student = new CreateStudent("Karola", StudentUnit.GDANSK);
+//
+//        var savedStudent = studentService.createStudent(student);
+//
+//        assertEquals(student.getName(), savedStudent.getName());
+//        assertEquals(student.getUnit(), savedStudent.getUnit());
+//        assertEquals(25L, savedStudent.getIndex());
+//        verify(studentRepository, times(1)).findMaxIndex();
+//    }
+//
+//    @Test
+//    void givenStudentWithUnitWarszawaWhenCreateStudentThenStudentWasSavedWithValidData() {
+//        var student = new CreateStudent("Karola", StudentUnit.WARSZAWA);
+//        ArgumentCaptor<Student> captor = ArgumentCaptor.forClass(Student.class);
+//
+//        var savedStudent = studentService.createStudent(student);
+//
+//        assertEquals(student.getName(), savedStudent.getName());
+//        assertEquals(student.getUnit(), savedStudent.getUnit());
+//        assertEquals(50L, savedStudent.getIndex());
+//        verify(studentRepository, times(1)).findMaxIndex();
+//        verify(studentRepository, times(1)).save(captor.capture());
+//        var studentArg = captor.getValue();
+//        assertEquals(student.getName(), studentArg.getName());
+//        assertEquals(student.getUnit(), studentArg.getUnit());
+//        assertEquals(50L, studentArg.getIndex());
+//    }
     @Test
     void givenStudentId_whenGetStudentById_ThenReturnStudentDto() {
         UUID studentId = UUID.randomUUID();

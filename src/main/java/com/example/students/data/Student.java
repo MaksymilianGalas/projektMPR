@@ -49,11 +49,18 @@ public class Student {
         this.unit = unit;
     }
 
+    public Student(String name, StudentUnit unit, Long index, String email, String phoneNumber) {
+        this.name = name;
+        this.unit = unit;
+        this.index = index;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+
     public Student(String name, StudentUnit unit, Long index) {
         this.name = name;
         this.unit = unit;
         this.index = index;
     }
-
-
 }

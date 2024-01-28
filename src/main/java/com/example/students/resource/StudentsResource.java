@@ -49,9 +49,16 @@ public class StudentsResource {
         }
         studentService.deleteByName(name);
     }
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateStudent(@PathVariable UUID id, @RequestBody @Validated StudentDto studentDto) {
+        studentService.updateStudent(id,new CreateStudent(studentDto));
+    }
+
     @PutMapping("/{id}")
-    public void updateStudent(@PathVariable UUID id, @RequestBody @Validated CreateStudent student) {
-        studentService.updateStudent(id, student);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void updateStudentPut(@PathVariable UUID id, @RequestBody @Validated StudentDto studentDto) {
+        studentService.updateStudent(id,new CreateStudent(studentDto));
     }
 
     @PostMapping("/{name}")
