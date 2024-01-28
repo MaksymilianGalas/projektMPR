@@ -81,7 +81,7 @@ class StudentResourceMockMvcTest {
         var returnedStudents = objectMapper.readValue(response.getContentAsString(), new TypeReference<List<StudentDto>>() {
         });
 
-        assertEquals(returnedStudents.size(), 1);
+        assertEquals(returnedStudents.size(), 3);
         assertEquals(returnedStudents.get(0).getName(), "Karola");
         assertEquals(returnedStudents.get(0).getUnit(), StudentUnit.GDANSK);
     }

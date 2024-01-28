@@ -19,7 +19,7 @@ import java.util.UUID;
 public class StudentsResource {
 
     private final StudentService studentService;
-    private final FriendsRepository friendsRepository;
+
 
 
     //Przyjmujemy Data transfer object, który służy nam do tworzenia studenta
@@ -57,8 +57,8 @@ public class StudentsResource {
         studentService.updateStudent(id,new CreateStudent(studentDto));
     }
 
-    @PostMapping("/{name}")
-    public List<StudentDto> getByName(@RequestParam String name) {
+    @GetMapping("/name/{name}")
+    public List<StudentDto> getByName(@PathVariable String name) {
         return studentService.getNameBy(name);
     }
     @GetMapping

@@ -22,14 +22,15 @@ public class FriendsResource {
     private final FriendsService friendsService;
 
     @GetMapping("/friends/{id}")
-    public List<FriendDto> findFriendsByStudentId(@RequestParam UUID id) {
+    public List<FriendDto> findFriendsByStudentId(@PathVariable UUID id) {
         return friendsService.findFriendsDtoById(id);
     }
 
-    @GetMapping("/assignments/{id}")
-    public List<Friends> findAssignmentsByStudentId(@RequestParam Assignment assignment) {
+    @GetMapping("/assignments")
+    public List<Friends> findAssignmentsByStudentId(@RequestBody Assignment assignment) {
         return friendsService.findAssignmentsByStudentId(assignment);
     }
+
 
     @DeleteMapping("/friends/{name}")
     public void deleteFriendById(@PathVariable String name) {
