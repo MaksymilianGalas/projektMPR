@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -39,4 +40,5 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
         return findByUnitAndName(StudentUnit.GDANSK, name);
     }
 
+    List<Student> findByEmailContainingIgnoreCase(String email);
 }

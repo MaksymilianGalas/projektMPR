@@ -49,7 +49,10 @@ public class StudentsResource {
         }
         studentService.deleteByName(name);
     }
-
+    @GetMapping("/search-by-email/{email}")
+    public List<StudentDto> getStudentsByEmail(@PathVariable String email) {
+        return studentService.getStudentsByEmail(email);
+    }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

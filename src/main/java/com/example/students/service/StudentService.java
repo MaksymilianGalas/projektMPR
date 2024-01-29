@@ -75,6 +75,12 @@ public class StudentService {
 
         return friendToSave;
     }
+    public List<StudentDto> getStudentsByEmail(String email) {
+        return studentRepository.findByEmailContainingIgnoreCase(email)
+                .stream()
+                .map(studentMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public Student createStudentTransactional(CreateStudent createStudent) {
